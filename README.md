@@ -65,6 +65,8 @@ Let's do something else:
 
 ```python
 from dict_ops import diff, put, cut
+from functools import reduce
+
 
 template = {
     "foo": None,
@@ -76,19 +78,20 @@ messy_array = {
     "foo": [
         {"foo": 1},
         {"bar": 2},
-        {"foo": 3, "bar": 3, "qux": 3}
+        {"foo": 3, "qux": 3}
     ]
 }
 
 fixer = lambda d1: put(template, cut(diff(d1, template), d1))
 
-messy_array["foo"] = list(map(fixer, messy_array.get("foo")))
-messy_array
-messy_array = {
-    "foo": [
-        {'foo': [{'foo': 1, 'bar': None, 'baz': None},
-        {'bar': 2, 'foo': None, 'baz': None},
-        {'foo': 3, 'bar': 3, 'baz': None}]}
-    ]
-}
+list(map(fixer, messy_array.get("foo")))
+[
+    {'foo': 1, 'bar': None, 'baz': None},
+    {'foo': None, 'bar': 2, 'baz': None},
+    {'foo': 3, 'bar': None, 'baz': None}
+]
+
+# let's get the superset of keys inside `messy_array.foo`:
+reduce(lambda d1, d2: put(d1, d2), messy_array.get("foo"))
+{'foo': 3, 'qux': 3, 'bar': 2}
 ```
