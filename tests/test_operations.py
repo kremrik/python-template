@@ -1,4 +1,4 @@
-from operations.operations import diff, put, cut
+from dict_ops import diff, put, cut
 import unittest
 
 
@@ -67,7 +67,7 @@ class test_cut(unittest.TestCase):
         cases = [({"foo": 1}, {}), ({}, {"foo": 1})]
 
         for obj1, obj2 in cases:
-            self.assertEqual(cut(obj1, obj2), {})
+            self.assertEqual(cut(obj1, obj2), {"foo": 1})
 
     def test_no_change(self):
         obj1 = {"bar": 1}

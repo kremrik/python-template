@@ -21,9 +21,6 @@ def diff(d1: dict, d2: dict) -> Union[None, dict]:
     Returns:
         A Python dict
     """
-    if not d1 or not d2:
-        return d1 or d2
-
     return _traverse(d1, d2, lambda x: {})
 
 
@@ -32,10 +29,10 @@ def put(d1: dict, d2: dict) -> Union[None, dict]:
     already exist (non-mutating action)
 
     Examples:
-        >>> d1 = {"baz": 1}
-        >>> d2 = {"foo": 2, "bar": 2}
+        >>> d1 = {"foo": 1, "bar": 1}
+        >>> d2 = {"foo": 2, "baz": 2}
         >>> put(d1, d2)
-        {"foo": 2, "bar": 2, "baz": 1}
+        {"foo": 2, "baz": 2, "bar": 1}
 
     Args:
         d1: A Python dict
@@ -44,9 +41,6 @@ def put(d1: dict, d2: dict) -> Union[None, dict]:
     Returns:
         A Python dict
     """
-    if not d1 or not d2:
-        return d1 or d2
-
     return _traverse(d1, d2, lambda x: deepcopy(x))
 
 
@@ -55,10 +49,10 @@ def cut(d1: dict, d2: dict) -> Union[None, dict]:
     not already exist (non-mutating action)
 
     Examples:
-        >>> d1 = {"bar": None}
-        >>> d2 = {"foo": 2, "bar": 2}
+        >>> d1 = {"foo": 1, "bar": 1}
+        >>> d2 = {"foo": 2, "baz": 2}
         >>> cut(d1, d2)
-        {"foo": 2}
+        {"baz": 2}
 
     Args:
         d1: A Python dict
@@ -67,13 +61,13 @@ def cut(d1: dict, d2: dict) -> Union[None, dict]:
     Returns:
         A Python dict
     """
-    if not d1 or not d2:
-        return d1 and d2
-
     return _traverse(d2, d1, lambda x: {})
 
 
 def _traverse(d1, d2, initializer=None, output=None):
+    if not d1 or not d2:
+        return d1 or d2
+
     output = initializer(d2)
 
     for k, v in d1.items():
