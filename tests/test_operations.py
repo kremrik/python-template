@@ -1,4 +1,4 @@
-from dict_ops import diff, put, cut
+from map_ops import diff, put, cut
 import unittest
 
 
@@ -27,6 +27,13 @@ class test_diff(unittest.TestCase):
         obj1 = {"foo": {"bar": {"baz": 1, "dur": 1}}}
         obj2 = {"foo": {"bar": {"qux": 1}}}
         gold = {"foo": {"bar": {"baz": 1, "dur": 1}}}
+        output = diff(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_multi_level_does_not_return_falsy_dict(self):
+        obj1 = {"foo": {"bar": {"baz": 1}}}
+        obj2 = {"foo": {"bar": {"baz": 1}}}
+        gold = {}
         output = diff(obj1, obj2)
         self.assertEqual(gold, output)
 
@@ -86,7 +93,7 @@ class test_cut(unittest.TestCase):
     def test_mult_level(self):
         obj1 = {"foo": {"bar": {"baz": 1, "qux": 1}}}
         obj2 = {"foo": {"bar": {"baz": 1, "qux": 1}}}
-        gold = {"foo": {"bar": {}}}
+        gold = {}
         output = cut(obj1, obj2)
         self.assertEqual(gold, output)
 

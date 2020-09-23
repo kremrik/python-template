@@ -1,12 +1,12 @@
-# dict-ops
-A simple, but high-powered, module for operation on dictionaries
+# map-ops
+A simple, but high-powered, module for operation on dictionaries and mapping objects
 
 ### Examples
-`dict-ops` exposes three functions: `diff`, `put`, and `cut`, 
+`map-ops` exposes three functions: `diff`, `put`, and `cut`, 
 best explained by example:
 
 ```python
-from dict_ops import diff, put, cut
+from map_ops import diff, put, cut
 
 d1 = {"foo": 1, "bar": 1}
 d2 = {"foo": 2, "baz": 2}
@@ -29,7 +29,7 @@ to have an identical set of keys on the other side of our
 pipeline. Here's how we can do that:
 
 ```python
-from dict_ops import diff, put, cut
+from map_ops import diff, put, cut
 
 template = {
     "foo": 0,
@@ -64,7 +64,7 @@ put(template, cut(diff(record, template), record))
 Let's do something else:
 
 ```python
-from dict_ops import diff, put, cut
+from map_ops import diff, put, cut
 from functools import reduce
 
 

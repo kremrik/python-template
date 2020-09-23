@@ -1,5 +1,5 @@
 SHELL := bash
-LINE_LENGTH := 60
+LINE_LENGTH := 59
 NO_COLOR := \e[39m
 BLUE := \e[34m
 GREEN := \e[32m
