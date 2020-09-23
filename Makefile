@@ -5,7 +5,7 @@ BLUE := \e[34m
 GREEN := \e[32m
 
 .PHONY: check
-check : unit-tests format lint success
+check : unit-tests type-check format lint success
 
 .PHONY: unit-tests
 unit-tests :
