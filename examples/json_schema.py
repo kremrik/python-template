@@ -44,7 +44,7 @@ class JsonSchema(object):
             return False
         return True
 
-    def __eq__(self, other: "JsonSchema") -> bool:  # type: ignore[override]
+    def __eq__(self, other: "JsonSchema") -> bool:
         return self.schema == other.schema
 
     def __repr__(self) -> str:
