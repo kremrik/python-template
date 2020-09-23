@@ -31,7 +31,7 @@ class JsonSchema(object):
         if not properties:
             self.schema["properties"] = properties
         properties[key] = value
-    
+
     def __iter__(self) -> Iterable:
         yield from self._get_properties()
 
@@ -39,7 +39,7 @@ class JsonSchema(object):
         # This makes sure that, for example, if we diff two
         # identical nested schemas, we still return a falsy
         # result (in this case, `{"type": "object"}`)
-        
+
         if "properties" not in self.schema:
             return False
         return True

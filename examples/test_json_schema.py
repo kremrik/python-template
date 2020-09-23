@@ -5,44 +5,31 @@ import unittest
 
 schema1 = JsonSchema(
     {
-        "type": "object", 
+        "type": "object",
         "properties": {
-            "foo": {
-                "type": "integer"
-            }, 
-            "bar": {
-                "type": "number"
-            }
-        }
+            "foo": {"type": "integer"},
+            "bar": {"type": "number"},
+        },
     }
 )
 
 schema2 = JsonSchema(
     {
-        "type": "object", 
+        "type": "object",
         "properties": {
-            "foo": {
-                "type": "integer"
-            }, 
-            "baz": {
-                "type": "string"
-            }
-        }
+            "foo": {"type": "integer"},
+            "baz": {"type": "string"},
+        },
     }
 )
 
 
 class test(unittest.TestCase):
-
     def test_diff(self):
         gold = JsonSchema(
             {
-                "type": "object", 
-                "properties": {
-                    "bar": {
-                        "type": "number"
-                    }
-                }
+                "type": "object",
+                "properties": {"bar": {"type": "number"}},
             }
         )
         output = diff(schema1, schema2)
@@ -51,18 +38,12 @@ class test(unittest.TestCase):
     def test_put(self):
         gold = JsonSchema(
             {
-                "type": "object", 
+                "type": "object",
                 "properties": {
-                    "foo": {
-                        "type": "integer"
-                    }, 
-                    "bar": {
-                        "type": "number"
-                    },
-                    "baz": {
-                        "type": "string"
-                    }
-                }
+                    "foo": {"type": "integer"},
+                    "bar": {"type": "number"},
+                    "baz": {"type": "string"},
+                },
             }
         )
         output = put(schema1, schema2)
@@ -71,12 +52,8 @@ class test(unittest.TestCase):
     def test_cut(self):
         gold = JsonSchema(
             {
-                "type": "object", 
-                "properties": {
-                    "baz": {
-                        "type": "string"
-                    }
-                }
+                "type": "object",
+                "properties": {"baz": {"type": "string"}},
             }
         )
         output = cut(schema1, schema2)
