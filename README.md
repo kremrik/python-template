@@ -2,8 +2,9 @@
 A simple, but high-powered, module for operation on dictionaries and mapping objects
 
 ### Examples
-`map-ops` exposes three functions: `diff`, `put`, and `cut`, 
-best explained by example:
+`map-ops` exposes three functions: `diff`, `put`, and `cut`. Take a look at the
+examples below for use with Python dictionaries. Other mapping-type objects are
+also supported, so look at [the examples](examples) for a more detailed demo.
 
 ```python
 from map_ops import diff, put, cut
