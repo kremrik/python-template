@@ -1,5 +1,5 @@
 # map-ops
-A simple, but high-powered, module for operation on dictionaries and mapping objects
+A simple, but high-powered, module for operating on dictionaries and mapping types
 
 ### Examples
 `map-ops` exposes three functions: `diff`, `put`, and `cut`. Take a look at the
