@@ -74,7 +74,7 @@ def _traverse(d1, d2, initializer=None, output=None):
         if k not in d2:
             output[k] = v
 
-        if isinstance(v, dict):
+        if isinstance(v, type(d1)):
             return {
                 k: _traverse(
                     v, d2.get(k), initializer, output
