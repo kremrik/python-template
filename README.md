@@ -75,24 +75,25 @@ template = {
     "baz": None
 }
 
-messy_array = {
-    "foo": [
-        {"foo": 1},
-        {"bar": 2},
-        {"foo": 3, "qux": 3}
-    ]
-}
+messy_array = [
+    {"foo": 1},
+    {"bar": 2},
+    {"foo": 3, "qux": 3}
+]
 
 fixer = lambda d1: put(template, cut(diff(d1, template), d1))
 
-list(map(fixer, messy_array.get("foo")))
+list(map(fixer, messy_array))
 [
     {'foo': 1, 'bar': None, 'baz': None},
     {'foo': None, 'bar': 2, 'baz': None},
     {'foo': 3, 'bar': None, 'baz': None}
 ]
 
-# let's get the superset of keys inside `messy_array.foo`:
-reduce(lambda d1, d2: put(d1, d2), messy_array.get("foo"))
-{'foo': 3, 'qux': 3, 'bar': 2}
+# let's get the superset of keys inside `messy_array`:
+reduce(
+    lambda d1, d2: put(d1, d2), 
+    messy_array
+).keys()
+dict_keys(['foo', 'qux', 'bar'])
 ```
