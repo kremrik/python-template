@@ -14,3 +14,5 @@ for closure under combination.
 
 The included `json_schema.py` and `test_json_schema.py` files should be 
 sufficient for demonstration.
+
+Note that it will not work with array types as-is. It's just a simple example.
