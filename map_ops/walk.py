@@ -7,7 +7,7 @@ __all__ = ["walk"]
 def walk(
     d1: dict,
     d2: dict,
-    initializer: Callable[[], dict] = None,
+    initializer: Callable[[dict, dict], dict] = None,
     value_comparator: Callable[[Any, Any], Any] = None,
     list_strategy: Callable[[Any, Any], Any] = None,
 ):

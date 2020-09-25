@@ -18,7 +18,7 @@ class test_walk(unittest.TestCase):
         gold = {"foo": 2, "bar": 1, "baz": 2}
         output = walk(d1, d2, initializer=initializer)
         self.assertEqual(gold, output)
-        
+
     def test_value_comparator(self):
         d1 = {"foo": 1, "bar": 1}
         d2 = {"foo": 2, "baz": 2}
