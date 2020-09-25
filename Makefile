@@ -36,7 +36,7 @@ lint :
 	@echo -e 		'-----------$(NO_COLOR)'
 	@flake8 ./*/*.py \
 		--max-line-length $(LINE_LENGTH) \
-		--ignore=F401 \
+		--ignore=F401,E731 \
 		--count \
 		|| exit 1
 
