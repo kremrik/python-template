@@ -9,11 +9,19 @@ import unittest
 
 
 class test_diff(unittest.TestCase):
-    def test_falsy_side(self):
-        cases = [({"foo": 1}, {}), ({}, {"foo": 1})]
+    def test_falsy_left_side(self):
+        obj1 = {}
+        obj2 = {"foo": 1}
+        gold = {}
+        output = diff(obj1, obj2)
+        self.assertEqual(gold, output)
 
-        for obj1, obj2 in cases:
-            self.assertEqual(diff(obj1, obj2), {"foo": 1})
+    def test_falsy_right_side(self):
+        obj1 = {"foo": 1}
+        obj2 = {}
+        gold = {"foo": 1}
+        output = diff(obj1, obj2)
+        self.assertEqual(gold, output)
 
     def test_no_diff(self):
         obj1 = {"foo": 1}
@@ -45,11 +53,19 @@ class test_diff(unittest.TestCase):
 
 
 class test_put(unittest.TestCase):
-    def test_falsy_sides(self):
-        cases = [({"foo": 1}, {}), ({}, {"foo": 1})]
+    def test_falsy_left_side(self):
+        obj1 = {}
+        obj2 = {"foo": 1}
+        gold = {"foo": 1}
+        output = put(obj1, obj2)
+        self.assertEqual(gold, output)
 
-        for obj1, obj2 in cases:
-            self.assertEqual(put(obj1, obj2), {"foo": 1})
+    def test_falsy_right_side(self):
+        obj1 = {"foo": 1}
+        obj2 = {}
+        gold = {"foo": 1}
+        output = put(obj1, obj2)
+        self.assertEqual(gold, output)
 
     def test_no_change(self):
         obj1 = {"foo": 1}
@@ -76,11 +92,19 @@ class test_put(unittest.TestCase):
 
 
 class test_cut(unittest.TestCase):
-    def test_falsy_sides(self):
-        cases = [({"foo": 1}, {}), ({}, {"foo": 1})]
+    def test_falsy_left_side(self):
+        obj1 = {}
+        obj2 = {"foo": 1}
+        gold = {"foo": 1}
+        output = cut(obj1, obj2)
+        self.assertEqual(gold, output)
 
-        for obj1, obj2 in cases:
-            self.assertEqual(cut(obj1, obj2), {"foo": 1})
+    def test_falsy_right_side(self):
+        obj1 = {"foo": 1}
+        obj2 = {}
+        gold = {}
+        output = cut(obj1, obj2)
+        self.assertEqual(gold, output)
 
     def test_no_change(self):
         obj1 = {"bar": 1}
@@ -103,6 +127,22 @@ class test_cut(unittest.TestCase):
         output = cut(obj1, obj2)
         self.assertEqual(gold, output)
 
+
+class test_rmerge(unittest.TestCase):
+    def test_falsy_left_side(self):
+        obj1 = {}
+        obj2 = {"foo": 1}
+        gold = {"foo": 1}
+        output = rmerge(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_falsy_right_side(self):
+        obj1 = {"foo": 1}
+        obj2 = {}
+        gold = {"foo": 1}
+        output = rmerge(obj1, obj2)
+        self.assertEqual(gold, output)
+
     def test_rmerge(self):
         obj1 = {"foo": 1, "bar": [1, 2], "baz": {"one": 1}}
         obj2 = {"bar": [3, 4], "baz": {"two": 2}, "qux": 1}
@@ -113,6 +153,29 @@ class test_cut(unittest.TestCase):
             "qux": 1,
         }
         output = rmerge(obj1, obj2)
+        self.assertEqual(gold, output)
+
+
+class test_rdiff(unittest.TestCase):
+    def test_falsy_left_side(self):
+        obj1 = {}
+        obj2 = {"foo": 1}
+        gold = {}
+        output = rdiff(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_falsy_right_side(self):
+        obj1 = {"foo": 1}
+        obj2 = {}
+        gold = {"foo": 1}
+        output = rdiff(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_no_change(self):
+        obj1 = {"foo": {"bar": [1, 2]}}
+        obj2 = {"foo": {"bar": [1, 2]}}
+        gold = {}
+        output = rdiff(obj1, obj2)
         self.assertEqual(gold, output)
 
     def test_rdiff(self):
@@ -127,7 +190,23 @@ class test_cut(unittest.TestCase):
             "baz": {"two": 2},
             "qux": 1,
         }
-        gold = {"bar": [None, 2, None], "baz": {"one": 1}}
+        gold = {"bar": [1, None, 3], "baz": {"one": 1}}
+        output = rdiff(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_rdiff_equal_lists(self):
+        obj1 = {
+            "foo": 1,
+            "bar": [1, 2, 3],
+            "baz": {"one": 1},
+        }
+        obj2 = {
+            "foo": 1,
+            "bar": [1, 2, 3],
+            "baz": {"two": 2},
+            "qux": 1,
+        }
+        gold = {"baz": {"one": 1}}
         output = rdiff(obj1, obj2)
         self.assertEqual(gold, output)
 

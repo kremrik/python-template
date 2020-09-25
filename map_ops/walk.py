@@ -10,15 +10,21 @@ def walk(
     initializer: Callable[[dict, dict], dict] = None,
     value_comparator: Callable[[Any, Any], Any] = None,
     list_strategy: Callable[[Any, Any], Any] = None,
-):
-    """
-    initializer is best described by: "traverse d1 with
-    respect to _, where _ is one of d1 or d2"
-    """
+) -> dict:
+    """Generalized function for pairwise traversal of dicts
+    Args:
+        d1: A Python dict
+        d1: Python dict
+        initializer: A Callable to tell `walk` what to
+            compare `d1` to while traversing
+        value_comparator: A Callable to tell `walk` how to
+            handle same keys with differing values
+        list_strategy: A Callable to tell `walk` how to
+            handle any lists it encounters
 
-    if not d1 or not d2:
-        return d1 or d2
-
+    Returns:
+        A Python dict
+    """
     if not initializer:
         initializer = lambda x, y: x
     if not value_comparator:
