@@ -80,11 +80,10 @@ def rmerge(d1: dict, d2: dict) -> dict:
 
 
 def rdiff(d1: dict, d2: dict) -> dict:
-    initializer = lambda x, y: {}
     return walk(
         d1,
         d2,
-        initializer=initializer,
+        initializer=lambda x, y: {},
         value_comparator=lambda x, y: x,
         list_strategy=_diff_list,
     )
