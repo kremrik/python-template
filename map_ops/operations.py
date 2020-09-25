@@ -2,67 +2,98 @@ from map_ops.walk import walk
 from copy import deepcopy
 
 
-__all__ = ["cut", "diff", "put"]
+__all__ = ["cut", "diff", "put", "rmerge", "rdiff"]
 
 
-def diff(obj1, obj2):
-    """Returns the key/value subset of `obj1` not in `obj2`
+# fully composable functions
+# ----------------------------------------------------------
+def diff(d1: dict, d2: dict) -> dict:
+    """Returns the key/value subset of `d1` not in `d2`
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> diff(obj1, obj2)
+        >>> d1 = {"foo": 1, "bar": 1}
+        >>> d2 = {"foo": 2, "baz": 2}
+        >>> diff(d1, d2)
         {"bar": 1}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
-    initializer = lambda x, y: {}
-    return walk(obj1, obj2, initializer=initializer)
+    return walk(d1, d2, initializer=lambda x, y: {})
 
 
-def put(obj1, obj2):
-    """Adds the keys/values in `obj1` to `obj2` if they do not
+def put(d1: dict, d2: dict) -> dict:
+    """Adds the keys/values in `d1` to `d2` if they do not
     already exist (non-mutating action)
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> put(obj1, obj2)
+        >>> d1 = {"foo": 1, "bar": 1}
+        >>> d2 = {"foo": 2, "baz": 2}
+        >>> put(d1, d2)
         {"foo": 2, "baz": 2, "bar": 1}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
-    obj2 = deepcopy(obj2)
-    initializer = lambda x, y: y
-    return walk(obj1, obj2, initializer=initializer)
+    d2 = deepcopy(d2)
+    return walk(d1, d2, initializer=lambda x, y: y)
 
 
-def cut(obj1, obj2):
-    """Removes the keys/values in `obj1` to `obj2` if they do
+def cut(d1: dict, d2: dict) -> dict:
+    """Removes the keys/values in `d1` to `d2` if they do
     not already exist (non-mutating action)
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> cut(obj1, obj2)
+        >>> d1 = {"foo": 1, "bar": 1}
+        >>> d2 = {"foo": 2, "baz": 2}
+        >>> cut(d1, d2)
         {"baz": 2}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
+    return walk(d2, d1, initializer=lambda x, y: {})
+
+
+# less composable functions
+# ----------------------------------------------------------
+def rmerge(d1: dict, d2: dict) -> dict:
+    d2 = deepcopy(d2)
+    return walk(
+        d1,
+        d2,
+        initializer=lambda x, y: y,
+        list_strategy=lambda x, y: x + y,
+    )
+
+
+def rdiff(d1: dict, d2: dict) -> dict:
     initializer = lambda x, y: {}
-    return walk(obj2, obj1, initializer=initializer)
+    return walk(
+        d1,
+        d2,
+        initializer=initializer,
+        value_comparator=lambda x, y: x,
+        list_strategy=_diff_list,
+    )
+
+
+def _diff_list(l1: list, l2: list) -> list:
+    # positional comparison
+    # mimics Clojure's clojure.data/diff
+    return [
+        element if element == l2[idx] else None
+        for idx, element in enumerate(l1)
+    ]

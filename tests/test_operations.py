@@ -1,4 +1,10 @@
-from map_ops import diff, put, cut
+from map_ops.operations import (
+    diff,
+    put,
+    cut,
+    rmerge,
+    rdiff,
+)
 import unittest
 
 
@@ -95,6 +101,34 @@ class test_cut(unittest.TestCase):
         obj2 = {"foo": {"bar": {"baz": 1, "qux": 1}}}
         gold = {}
         output = cut(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_rmerge(self):
+        obj1 = {"foo": 1, "bar": [1, 2], "baz": {"one": 1}}
+        obj2 = {"bar": [3, 4], "baz": {"two": 2}, "qux": 1}
+        gold = {
+            "foo": 1,
+            "bar": [1, 2, 3, 4],
+            "baz": {"one": 1, "two": 2},
+            "qux": 1,
+        }
+        output = rmerge(obj1, obj2)
+        self.assertEqual(gold, output)
+
+    def test_rdiff(self):
+        obj1 = {
+            "foo": 1,
+            "bar": [1, 2, 3],
+            "baz": {"one": 1},
+        }
+        obj2 = {
+            "foo": 1,
+            "bar": [3, 2, 1],
+            "baz": {"two": 2},
+            "qux": 1,
+        }
+        gold = {"bar": [None, 2, None], "baz": {"one": 1}}
+        output = rdiff(obj1, obj2)
         self.assertEqual(gold, output)
 
 

@@ -28,8 +28,6 @@ def walk(
 
     output = initializer(d1, d2)
 
-    # TODO: move ifs out and let recursive terminations
-    #  handle the res assignment?
     for k, v in d1.items():
         res = None
 
@@ -48,8 +46,12 @@ def walk(
         elif isinstance(v, list):
             res = list_strategy(v, d2[k])
 
-        else:
+        elif v != d2[k]:
             res = value_comparator(v, d2[k])
+
+        else:
+            # nothing to do!
+            pass
 
         if res:
             output[k] = res
