@@ -153,8 +153,37 @@
             
   <div class="section" id="map-ops">
 <h1>map_ops<a class="headerlink" href="#map-ops" title="Permalink to this headline">¶</a></h1>
-<p>A simple, but high-powered, module for operating on dictionaries</p>
 <p><a class="reference external" href="https://github.com/kremrik/map-ops">https://github.com/kremrik/map-ops</a></p>
+<p>A simple, but high-powered, module for operating on dictionaries.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">map_ops</span></code> was designed to be the simplest possible way to add keys/values,
+remove keys/values, and find differences between two dictionaries. However,
+closure under composition allows you to treat a small set of functions as a
+DSL of-sorts, providing sophisticated behavior with minimal effort.</p>
+</div>
+<div class="section" id="basic-usage">
+<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<p>The most basic usage is obtained in <a class="reference internal" href="operations.html#operations"><span class="std std-ref">operations</span></a>.
+This module exposes three functions, fully closed under combination, and
+returning new objects (no weird behavior when mutating original objects).</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+
+<span class="n">diff</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="p">{</span><span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="n">put</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+
+<span class="n">cut</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="p">{</span><span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
@@ -162,6 +191,7 @@
 <li class="toctree-l1"><a class="reference internal" href="other.html">other</a></li>
 <li class="toctree-l1"><a class="reference internal" href="core.html">core</a></li>
 </ul>
+</div>
 </div>
 </div>
 <div class="section" id="indices-and-tables">
