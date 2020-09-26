@@ -52,6 +52,13 @@ coverage:
 	@pytest --cov=$(MODULE) --cov-config=.coveragerc --cov-report html
 	@python3 -m http.server 8000 --directory htmlcov/
 
+.PHONY: sphinx
+sphinx:
+	@cd sphinx && make html
+	@touch docs/.nojekyll
+	@cp -a sphinx/build/html/* docs
+	@python3 -m http.server 8000 --directory docs/
+
 .PHONY: set-hooks
 set-hooks:
 	@git config core.hooksPath .githooks
