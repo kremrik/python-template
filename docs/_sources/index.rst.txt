@@ -11,6 +11,7 @@ https://github.com/kremrik/map-ops
 
    operations
    other
+   core
 
 Indices and tables
 ==================

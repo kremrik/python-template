@@ -1,0 +1,7 @@
+core
+====
+
+Generalized procedures backing :meth:`map_ops.operations`
+
+.. automodule:: map_ops.core
+    :members: cut_, diff_, put_
