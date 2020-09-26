@@ -1,4 +1,5 @@
 from typing import Any, Callable
+from collections.abc import Iterable, Mapping
 
 
 __all__ = ["walk"]
@@ -40,16 +41,16 @@ def walk(
         if k not in d2:
             res = v
 
-        elif isinstance(v, dict):
+        elif isinstance(v, Mapping):
             res = walk(
-                v,
-                d2[k],
+                v,  # type: ignore
+                d2[k],  # type: ignore
                 initializer,
                 value_comparator,
                 list_strategy,
             )
 
-        elif isinstance(v, list):
+        elif isinstance(v, Iterable):
             res = list_strategy(v, d2[k])
 
         elif v != d2[k]:
