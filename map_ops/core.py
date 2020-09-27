@@ -12,6 +12,19 @@ def diff_(
     value_comparator: Callable = None,
     list_strategy: Callable = None,
 ) -> dict:
+    """Generalized function for differencing two dicts
+
+    Args:
+        d1: A Python dict
+        d1: Python dict
+        value_comparator: A Callable to tell `walk` how to
+            handle same keys with differing values
+        list_strategy: A Callable to tell `walk` how to
+            handle any lists it encounters
+
+    Returns:
+        A Python dict
+    """
     d1 = deepcopy(d1)
     return walk(
         d1,
@@ -28,6 +41,19 @@ def put_(
     value_comparator: Callable = None,
     list_strategy: Callable = None,
 ) -> dict:
+    """Generalized function for inserting `d1` into `d2`
+
+    Args:
+        d1: A Python dict
+        d1: Python dict
+        value_comparator: A Callable to tell `walk` how to
+            handle same keys with differing values
+        list_strategy: A Callable to tell `walk` how to
+            handle any lists it encounters
+
+    Returns:
+        A Python dict
+    """
     d2 = deepcopy(d2)
     return walk(
         d1,
@@ -44,6 +70,19 @@ def cut_(
     value_comparator: Callable = None,
     list_strategy: Callable = None,
 ) -> dict:
+    """Generalized function for removing `d1` from `d2`
+
+    Args:
+        d1: A Python dict
+        d1: Python dict
+        value_comparator: A Callable to tell `walk` how to
+            handle same keys with differing values
+        list_strategy: A Callable to tell `walk` how to
+            handle any lists it encounters
+
+    Returns:
+        A Python dict
+    """
     d2 = deepcopy(d2)
     return walk(
         d2,

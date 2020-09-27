@@ -2,7 +2,7 @@
 A simple, but high-powered, module for operating on dictionaries
 
 ### Examples
-`map-ops` exposes three functions: `diff`, `put`, and `cut`. It's easiest to
+`map_ops` exposes three functions: `diff`, `put`, and `cut`. It's easiest to
 understand through examples, take a look below!
 
 ```python

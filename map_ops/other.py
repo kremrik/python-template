@@ -9,10 +9,17 @@ def rmerge(d1: dict, d2: dict) -> dict:
     simple __add__ (non-mutating action)
 
     Examples:
-        >>> d1 = {"foo": 1, "bar": [1, 2]}
-        >>> d2 = {"baz": 2, "bar": [3, 4]}
-        >>> rmerge(d1, d2)
-        {"foo": 1, "bar": [1, 2, 3, 4], "baz": 2}
+
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.other import rmerge
+
+            d1 = {"foo": 1, "bar": [1, 2]}
+            d2 = {"baz": 2, "bar": [3, 4]}
+
+            rmerge(d1, d2)
+            {"foo": 1, "bar": [1, 2, 3, 4], "baz": 2}
 
     Args:
         d1: A Python dict
@@ -34,10 +41,15 @@ def rdiff(d1: dict, d2: dict) -> dict:
     (non-mutating action)
 
     Examples:
-        >>> d1 = {"foo": 1, "bar": [1, 2, 3]}
-        >>> d2 = {"foo": 2, "bar": [3, 2, 1, 4]}
-        >>> rdiff(d1, d2)
-        {"foo": 1, "bar": [1, None, 3]}
+
+        .. highlight:: python
+        .. code-block:: python
+
+            d1 = {"foo": 1, "bar": [1, 2, 3]}
+            d2 = {"foo": 2, "bar": [3, 2, 1, 4]}
+
+            rdiff(d1, d2)
+            {"foo": 1, "bar": [1, None, 3]}
 
     Args:
         d1: A Python dict

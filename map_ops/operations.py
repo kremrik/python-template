@@ -8,10 +8,16 @@ def diff(d1: dict, d2: dict) -> dict:
     """Returns the key/value subset of `d1` not in `d2`
 
     Examples:
-        >>> d1 = {"foo": 1, "bar": 1}
-        >>> d2 = {"foo": 2, "baz": 2}
-        >>> diff(d1, d2)
-        {"bar": 1}
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import diff
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            diff(d1, d2)
+            {"bar": 1}
 
     Args:
         d1: A Python dict
@@ -28,10 +34,16 @@ def put(d1: dict, d2: dict) -> dict:
     already exist (non-mutating action)
 
     Examples:
-        >>> d1 = {"foo": 1, "bar": 1}
-        >>> d2 = {"foo": 2, "baz": 2}
-        >>> put(d1, d2)
-        {"foo": 2, "baz": 2, "bar": 1}
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import put
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            put(d1, d2)
+            {"foo": 2, "baz": 2, "bar": 1}
 
     Args:
         d1: A Python dict
@@ -48,10 +60,17 @@ def cut(d1: dict, d2: dict) -> dict:
     not already exist (non-mutating action)
 
     Examples:
-        >>> d1 = {"foo": 1, "bar": 1}
-        >>> d2 = {"foo": 2, "baz": 2}
-        >>> cut(d1, d2)
-        {"baz": 2}
+
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import cut
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            cut(d1, d2)
+            {"baz": 2}
 
     Args:
         d1: A Python dict
