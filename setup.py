@@ -35,6 +35,6 @@ setup(
     description="A simple, but high-powered, module for operating on dictionaries and mapping types",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    packages=find_packages(exclude=("tests", "examples")),
+    packages=find_packages(exclude=("docs")),
     include_package_data=True,
 )

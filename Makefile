@@ -5,6 +5,8 @@ NO_COLOR := \e[39m
 BLUE := \e[34m
 GREEN := \e[32m
 
+#----------------------------------------------------------
+
 .PHONY: check
 check : unit-tests type-check black-format lint sphinx success
 

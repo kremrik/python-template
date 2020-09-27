@@ -167,8 +167,7 @@ DSL of-sorts, providing sophisticated behavior with minimal effort.</p>
 <p>The most basic usage is obtained in <a class="reference internal" href="operations.html#operations"><span class="std std-ref">operations</span></a>.
 This module exposes three functions, fully closed under combination, and
 returning new objects (no weird behavior when mutating original objects).</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
 
 <span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
 <span class="n">d2</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
@@ -183,13 +182,15 @@ returning new objects (no weird behavior when mutating original objects).</p>
 <span class="p">{</span><span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
 </pre></div>
 </div>
-</div></blockquote>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="operations.html">operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="other.html">other</a></li>
-<li class="toctree-l1"><a class="reference internal" href="core.html">core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#examples">Examples</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>

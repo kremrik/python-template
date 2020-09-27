@@ -85,7 +85,10 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="operations.html">operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="other.html">other</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">core</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -156,6 +159,74 @@
 <p>Generalized procedures backing <a class="reference internal" href="operations.html#module-map_ops.operations" title="map_ops.operations"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map_ops.operations()</span></code></a>.
 If you need greater control over specific behavior as it pertains to any of the
 basic <code class="docutils literal notranslate"><span class="pre">operations</span></code> functions, use these instead.</p>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>Here are some case studies for how you could write a custom <code class="docutils literal notranslate"><span class="pre">put</span></code> function
+that concatenates lists. The first one is only concerned with lists occuring at
+the “top” level of a dictionary (ie, excluding lists WITHIN lists):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.core</span> <span class="kn">import</span> <span class="n">put_</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">l_put</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
+    <span class="n">strategy</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">put_</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">list_strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">)</span>
+
+<span class="n">l_put</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We can up the game a little and assume we want to also concatenate lists within
+complex objects which are, themselves, in a list:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.core</span> <span class="kn">import</span> <span class="n">put_</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+
+<span class="n">d1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]},</span>
+        <span class="p">{</span><span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">strategy</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="c1"># what to do with a list of primitives</span>
+        <span class="k">return</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span>
+    <span class="c1"># what to do with a list of dicts</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span>
+        <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">put_</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">list_strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">),</span>
+        <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span>
+    <span class="p">)</span>
+
+<span class="n">put_</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">list_strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;baz&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 <span class="target" id="module-map_ops.core"></span><dl class="py function">
 <dt id="map_ops.core.cut_">
 <code class="sig-prename descclassname">map_ops.core.</code><code class="sig-name descname">cut_</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d1</span></em>, <em class="sig-param"><span class="n">d2</span></em>, <em class="sig-param"><span class="n">value_comparator</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">list_strategy</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#map_ops.core.cut_" title="Permalink to this definition">¶</a></dt>
@@ -228,6 +299,7 @@ handle any lists it encounters</p></li>
 </dl>
 </dd></dl>
 
+</div>
 </div>
 
 

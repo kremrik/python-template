@@ -17,22 +17,22 @@ The most basic usage is obtained in :ref:`operations`.
 This module exposes three functions, fully closed under combination, and
 returning new objects (no weird behavior when mutating original objects).
 
-   .. highlight:: python
-   .. code-block:: python
+.. highlight:: python
+.. code-block:: python
 
-      from map_ops.operations import cut, diff, put
+   from map_ops.operations import cut, diff, put
 
-      d1 = {"foo": 1, "bar": 1}
-      d2 = {"foo": 2, "baz": 2}
+   d1 = {"foo": 1, "bar": 1}
+   d2 = {"foo": 2, "baz": 2}
 
-      diff(d1, d2)
-      {"bar": 1}
+   diff(d1, d2)
+   {"bar": 1}
 
-      put(d1, d2)
-      {"foo": 2, "baz": 2, "bar": 1}
+   put(d1, d2)
+   {"foo": 2, "baz": 2, "bar": 1}
 
-      cut(d1, d2)
-      {"baz": 2}
+   cut(d1, d2)
+   {"baz": 2}
 
 
 .. toctree::

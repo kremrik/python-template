@@ -56,10 +56,6 @@ def walk(
         elif v != d2[k]:
             res = value_comparator(v, d2[k])
 
-        else:
-            # nothing to do!
-            pass
-
         if res:
             output[k] = res
 

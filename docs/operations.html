@@ -159,8 +159,7 @@ advanced functionality with minimal effort. For example, let’s say we have a
 stream of records (dicts) headed our way. We also need those records to have an
 identical set of keys, since the incoming records vary in shape. Here’s how we
 can accomplish this:</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
 
 <span class="n">template</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;foo&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -192,10 +191,8 @@ can accomplish this:</p>
 <span class="p">{</span><span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="s1">&#39;ni&#39;</span><span class="p">,</span> <span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
 </pre></div>
 </div>
-</div></blockquote>
 <p>Let’s figure out the superset of keys a list of dicts contains:</p>
-<blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">map_ops.operations</span> <span class="kn">import</span> <span class="n">cut</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="n">put</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
 
 <span class="n">messy_array</span> <span class="o">=</span> <span class="p">[</span>
@@ -211,7 +208,6 @@ can accomplish this:</p>
 <span class="n">dict_keys</span><span class="p">([</span><span class="s1">&#39;foo&#39;</span><span class="p">,</span> <span class="s1">&#39;qux&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div></blockquote>
 <span class="target" id="module-map_ops.operations"></span><dl class="py function">
 <dt id="map_ops.operations.cut">
 <code class="sig-prename descclassname">map_ops.operations.</code><code class="sig-name descname">cut</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d1</span></em>, <em class="sig-param"><span class="n">d2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#map_ops.operations.cut" title="Permalink to this definition">¶</a></dt>
