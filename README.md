@@ -1,4 +1,6 @@
 # map-ops
+![Python package](https://github.com/kremrik/map-ops/workflows/Python%20package/badge.svg)
+
 A simple, but high-powered, module for operating on dictionaries
 
 ### Examples
