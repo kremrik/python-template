@@ -3,6 +3,12 @@
 
 A simple, but high-powered, module for operating on dictionaries
 
+### Installation
+Currently either installable from source, or by pip installing from github:
+```
+python -m pip install git+https://github.com/kremrik/map-ops.git
+```
+
 ### Examples
 For comprehensive examples, please read the [docs](https://kremrik.github.io/map-ops/)
 

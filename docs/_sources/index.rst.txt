@@ -4,6 +4,12 @@ https://github.com/kremrik/map-ops
 
 A simple, but high-powered, module for operating on dictionaries. 
 
+Installation
+------------
+Currently either installable from source, or by pip installing from github:
+
+``python -m pip install git+https://github.com/kremrik/map-ops.git``
+
 Introduction
 ------------
 ``map_ops`` was designed to be the simplest possible way to add keys/values,
