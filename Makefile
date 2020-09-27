@@ -6,7 +6,7 @@ BLUE := \e[34m
 GREEN := \e[32m
 
 .PHONY: check
-check : unit-tests type-check black-format lint success
+check : unit-tests type-check black-format lint sphinx success
 
 .PHONY: unit-tests
 unit-tests :
@@ -36,9 +36,18 @@ lint :
 	@echo -e 		'-----------$(NO_COLOR)'
 	@flake8 ./*/*.py \
 		--max-line-length $(LINE_LENGTH) \
-		--ignore=F401 \
+		--ignore=F401,E731,F403 \
 		--count \
 		|| exit 1
+
+.PHONY: sphinx
+sphinx:
+	@echo
+	@echo -e '$(BLUE)sphinx-docs'
+	@echo -e 		'-----------$(NO_COLOR)'
+	@cd sphinx && make html
+	@touch docs/.nojekyll
+	@cp -a sphinx/build/html/* docs
 
 .PHONY: success
 success :
@@ -51,6 +60,10 @@ success :
 coverage: 
 	@pytest --cov=$(MODULE) --cov-config=.coveragerc --cov-report html
 	@python3 -m http.server 8000 --directory htmlcov/
+
+.PHONY: docs
+docs:
+	@python3 -m http.server 8001 --directory docs/
 
 .PHONY: set-hooks
 set-hooks:

@@ -1,84 +1,82 @@
-from copy import deepcopy
+from map_ops.core import diff_, put_, cut_
 
 
 __all__ = ["cut", "diff", "put"]
 
 
-def diff(obj1, obj2):
-    """Returns the key/value subset of `obj1` not in `obj2`
+def diff(d1: dict, d2: dict) -> dict:
+    """Returns the key/value subset of `d1` not in `d2`
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> diff(obj1, obj2)
-        {"bar": 1}
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import diff
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            diff(d1, d2)
+            {"bar": 1}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
-    return _traverse(obj1, obj2, lambda x: type(obj1)())
+    return diff_(d1, d2)
 
 
-def put(obj1, obj2):
-    """Adds the keys/values in `obj1` to `obj2` if they do not
+def put(d1: dict, d2: dict) -> dict:
+    """Adds the keys/values in `d1` to `d2` if they do not
     already exist (non-mutating action)
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> put(obj1, obj2)
-        {"foo": 2, "baz": 2, "bar": 1}
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import put
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            put(d1, d2)
+            {"foo": 2, "baz": 2, "bar": 1}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
-    return _traverse(obj1, obj2, lambda x: deepcopy(x))
+    return put_(d1, d2)
 
 
-def cut(obj1, obj2):
-    """Removes the keys/values in `obj1` to `obj2` if they do
+def cut(d1: dict, d2: dict) -> dict:
+    """Removes the keys/values in `d1` to `d2` if they do
     not already exist (non-mutating action)
 
     Examples:
-        >>> obj1 = {"foo": 1, "bar": 1}
-        >>> obj2 = {"foo": 2, "baz": 2}
-        >>> cut(obj1, obj2)
-        {"baz": 2}
+
+        .. highlight:: python
+        .. code-block:: python
+
+            from map_ops.operations import cut
+
+            d1 = {"foo": 1, "bar": 1}
+            d2 = {"foo": 2, "baz": 2}
+
+            cut(d1, d2)
+            {"baz": 2}
 
     Args:
-        obj1: A Python dict
-        obj2: A Python dict
+        d1: A Python dict
+        d2: A Python dict
 
     Returns:
         A Python dict
     """
-    return _traverse(obj2, obj1, lambda x: type(obj1)())
-
-
-def _traverse(obj1, obj2, initializer=None, output=None):
-    if not obj1 or not obj2:
-        return obj1 or obj2
-
-    output = initializer(obj2)
-
-    for k in obj1:
-        v = obj1[k]
-        if k not in obj2:
-            output[k] = v
-
-        elif isinstance(v, type(obj1)):
-            res = _traverse(
-                v, obj2[k], initializer, output
-            )
-            if res:
-                output[k] = res
-
-    return output
+    return cut_(d1, d2)

@@ -1,4 +1,4 @@
 #!/bin/bash
 
-make check
+make check || exit 1
 git add .
