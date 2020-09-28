@@ -2,6 +2,10 @@
 
 operations
 ==========
+The basic building-blocks of ``map_ops``
+
+Examples
+--------
 
 ``diff``, ``put``, and ``cut`` are closed under combination, allowing for
 advanced functionality with minimal effort. For example, let's say we have a
