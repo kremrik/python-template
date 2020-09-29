@@ -1,5 +1,5 @@
 SHELL := bash
-MODULE := map_ops
+MODULE := python_template
 LINE_LENGTH := 59
 NO_COLOR := \e[39m
 BLUE := \e[34m

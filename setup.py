@@ -3,17 +3,27 @@ import re
 from setuptools import find_packages, setup
 
 
-PKG = "map_ops"
-VERSIONFILE = os.path.join(PKG, "_version.py")
+DESCRIPTION = ""
 AUTHOR = "Kyle Emrick"
 GITID = "kremrik"
 
 
+def get_package_name() -> str:
+    packagefile = ".package-name"
+    package = open(packagefile, "rt")\
+        .read()\
+        .strip()\
+        .replace("-", "_")
+    return package
+
+
 def get_version() -> str:
+    package = get_package_name()
+    versionfile = os.path.join(package, "_version.py")
     verstr = "unknown"
 
     try:
-        verstrline = open(VERSIONFILE, "rt").read()
+        verstrline = open(versionfile, "rt").read()
     except EnvironmentError:
         pass  # no file
     else:
@@ -28,11 +38,11 @@ def get_version() -> str:
 
 
 setup(
-    name=PKG,
+    name=get_package_name(),
     version=get_version(),
     author=AUTHOR,
-    url="https://github.com/{}/{}".format(GITID, PKG),
-    description="A simple, but high-powered, module for operating on dictionaries and mapping types",
+    url="https://github.com/{}/{}".format(GITID, get_package_name()),
+    description=DESCRIPTION,
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     packages=find_packages(exclude=("docs")),
