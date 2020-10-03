@@ -1,5 +1,5 @@
 SHELL := bash
-MODULE := python_template
+MODULE := $(shell cat .package-name)
 LINE_LENGTH := 59
 NO_COLOR := \e[39m
 BLUE := \e[34m
@@ -29,7 +29,7 @@ black-format :
 	@echo
 	@echo -e '$(BLUE)black-format'
 	@echo -e 		'------------$(NO_COLOR)'
-	@black ./*/*.py -l $(LINE_LENGTH)
+	@black $(MODULE) -l $(LINE_LENGTH)
 
 .PHONY: flake8-lint
 lint :
