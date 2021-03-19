@@ -1,14 +1,14 @@
-## How I set up my Python environment
+# How I set up my Python environment
 So, for starters, I use Miniconda.
 It's sort of a holdover from when I worked in analytics, but I've come to appreciate its simplicity.
 Don't @ me.
 
-### Setup
+## Setup
 ***SIGH*** Python's dependency management is...not glamorous.
 This might seem complicated compared to other languages, but this method gives you complete and full control.
 You'll appreciate this if you ever install a corrupt dependency...
 
-#### 1. Download Miniconda
+### 1. Download Miniconda
 I usually just go to this link to grab the URL of the script: https://docs.conda.io/en/latest/miniconda.html
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -20,7 +20,7 @@ sha256sum Miniconda3-latest-Linux-x86_64.sh
 ```
 Should match the hash next to the version of Miniconda you downloaded from link above.
 
-#### 2. Run install script
+### 2. Run install script
 ```bash
 bash Miniconda3-latest-Linux-x86_64.sh
 ```
@@ -30,7 +30,7 @@ At the end it'll probably ask if you want to add conda to your path.
 I always hit NO, because I don't want anything messing with my `.bashrc`.
 If you were planning on using miniconda specify for its `conda` dependency resolver, you are more than welcome to hit YES.
 
-#### 3. Prepend miniconda's Python to your path
+### 3. Prepend miniconda's Python to your path
 Something like this in your `.bashrc` should suffice
 ```bash
 export PATH=~/miniconda3/bin:$PATH
@@ -42,10 +42,10 @@ $ which python
 /home/[your-user]/miniconda3/bin/python
 ```
 
-### Using
+## Using
 Once the steps above are complete, you should be able to create environments and install 3rd-party libraries using `pip` or `conda`.
 
-#### Create environment
+### Create environment
 ```bash
 conda create -n test-env pip
 ```
@@ -65,7 +65,7 @@ $ which pip
 
 If you see all that, you're home free.
 
-#### Install module(s)
+### Install module(s)
 For example, installing pytest:
 ```bash
 pip install pytest
@@ -73,7 +73,7 @@ pip install pytest
 
 That's it.
 
-#### Examine the environment
+### Examine the environment
 This part isn't strictly necessary, but it's helpful to see what's going on.
 This is where all of your environments live:
 ```bash
