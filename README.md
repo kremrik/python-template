@@ -11,3 +11,6 @@
 1. Run `make set-hooks` to set the Makefile pipeline to run before each commit (you may want/need to remove some of the dependencies in the `check` recipe)
 1. Install the development dependencies:
     - with pip (ensure you are in the proper environment): `pip install -r dev_dependencies.txt`
+
+### Environment setup
+If you need a (slightly opinionated) way of getting started with a Python environment management tool, take a look [here](setup.md)
